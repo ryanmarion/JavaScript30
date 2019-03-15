@@ -96,6 +96,39 @@
   </div>
 
 <script>
+  //can run obj.checked to verify if the checkbox is/isn't checked. need this!
+  //should probably use querySelectorAll, check thru the node list
+  //set up an event listener to check for shift plus click....
+  let lastChecked;
+
+  function checkShift(e){
+    //console.log(e.shiftKey); //works
+    console.dir(this);
+    let inBetween = false;
+    let clickedItem = this;
+
+    if (e.shiftKey && this.checked && lastChecked){
+      //loop over the check Checkboxes
+      items.forEach((item)=>{
+        //base case - all unchecked = don't do anything, lastChecked will be set to this
+        if(item === this || item ===lastChecked){
+          inBetween = !inBetween;
+          console.log("starting to check in between");
+        }
+        if(inBetween){
+          item.checked = true;
+        }
+      });
+
+    }
+
+    lastChecked = this;
+  }
+
+  const items = document.querySelectorAll('.item input'); //grab all check boxes
+  console.log(items);
+  items.forEach(item=>item.addEventListener('click',checkShift));
+
 </script>
 </body>
 </html>

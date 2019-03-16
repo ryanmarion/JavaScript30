@@ -58,6 +58,33 @@
       };
     }
 
+    const sliders = document.querySelectorAll('.slide-in');
+    // console.log(sliders); //got it
+
+    function checkScroll(e){
+      //console.log(window.scrollY);
+      //loop over the image, find out where the image needs to be shown
+      sliders.forEach(slider=>{
+        //halfway thru the image
+        const slideInAt = (window.scrollY + window.innerHeight)-slider.height/2;
+        //bottom of the image
+        const sliderbottom = slider.offsetTop + slider.height;
+        const isHalfShown = slideInAt > slider.offsetTop;
+        const isntscrolledpast = window.scrollY < sliderbottom;
+        //console.log(slideInAt,sliderbottom,isHalfShown,isntscrolledpast);
+        if(isHalfShown && isntscrolledpast){
+          console.log('here');
+          slider.classList.add('active');
+        } else{
+          console.log("ran");
+          slider.classList.remove('active');
+        }
+
+      });
+    }
+
+    window.addEventListener('scroll',debounce(checkScroll));
+
   </script>
 
   <style>
@@ -68,11 +95,11 @@
       font-size: 20px;
       font-weight: 200;
     }
-    
+
     body {
       margin: 0;
     }
-    
+
     *, *:before, *:after {
       box-sizing: inherit;
     }
@@ -107,7 +134,7 @@
     .align-left.slide-in {
       transform: translateX(-30%) scale(0.95);
     }
-    
+
     .align-right.slide-in {
       transform: translateX(30%) scale(0.95);
     }

@@ -182,6 +182,32 @@
     </li>
   </ul>
 <script>
+  const videos = document.querySelector('.videos');
+  const items = Array.from(videos.querySelectorAll('[data-time]'));
+  console.log(items);
+
+  //items.forEach(item => console.log(item.dataset.time));
+  //need to add the times of each video using reduce
+  //first extract the total seconds for each item - map over every item and every dataset value
+  const seconds = items.map(node=>node.dataset.time)
+        .map(timeCode=>{
+          const [min,sec] = timeCode.split(':').map(parseFloat);
+          return (min * 60) + sec;
+        });
+
+  //add all times together w/ reduce
+  let totalTime = seconds.reduce((a,b)=>a+b);
+  let timeLeft = totalTime;
+
+  const hours = Math.floor(timeLeft/3600);
+  timeLeft = timeLeft %3600;
+
+  const mins = Math.floor(timeLeft/60);
+  timeLeft = timeLeft%60;
+
+  console.log(`${hours}:${mins}:${timeLeft}`);
+
+
 </script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,27 +30,18 @@
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
   const items = JSON.parse(localStorage.getItem('items')) || [];
-
-  console.log(addItems,itemsList,items);
-
-  function addItem(e){
+  function addItem(e) {
     e.preventDefault();
-    const text = this.querySelector('[name=item]').value;
-    const item={
-      text:text,
-      done:false
-    }
-
+    const text = (this.querySelector('[name=item]')).value;
+    const item = {
+      text,
+      done: false
+    };
     items.push(item);
-    populateList(items,itemsList);
-    localStorage.setItem('items',JSON.stringify(items));
-    console.log(items);
+    populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
     this.reset();
-
-    //itemsList.forEach()
-    // items.forEach()
   }
-
   function populateList(plates = [], platesList) {
     platesList.innerHTML = plates.map((plate, i) => {
       return `
@@ -60,23 +52,17 @@
       `;
     }).join('');
   }
-
-  function toggleDone(e){
-    //console.log(e);
-    if(!e.target.matches('input')) return; //skip if it's an input
+  function toggleDone(e) {
+    if (!e.target.matches('input')) return; // skip this unless it's an input
     const el = e.target;
-    console.log(el.dataset.index);
     const index = el.dataset.index;
     items[index].done = !items[index].done;
-    localStorage.setItem('items',JSON.stringify(items));
-    populateList(items,itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
   }
-
-  addItems.addEventListener('submit',addItem);
-  itemsList.addEventListener('click',toggleDone);
-  populateList(items,itemsList);
-
-
+  addItems.addEventListener('submit', addItem);
+  itemsList.addEventListener('click', toggleDone);
+  populateList(items, itemsList);
 </script>
 
 

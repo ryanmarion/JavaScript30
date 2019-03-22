@@ -3,4 +3,4 @@ node_modules/
 *.log
 haters/
 .idea/
-.tern-project/
+.tern-project

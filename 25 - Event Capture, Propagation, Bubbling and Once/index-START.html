@@ -17,9 +17,9 @@
   html {
     box-sizing: border-box;
   }
-
-  *, *:before, *:after {
-    box-sizing: inherit;
+  
+  *, *:before, *:after { 
+    box-sizing: inherit; 
   }
 
   div {
@@ -38,35 +38,10 @@
   .three {
     background: coral;
   }
-
-  button {
-    width:auto;
-    height:auto
-  }
 </style>
 
-<button>Click Me</button>
+<button></button>
 <script>
-  const divs = document.querySelectorAll('div');
-  const button = document.querySelector('button');
-
-  function logText(e){
-    console.log(this.classList.value);
-    // e.stopPropagation();
-  }
-
-  // document.body.addEventListener('click',logText,{capture:false});
-
-  divs.forEach(div=>div.addEventListener('click',logText, {
-    capture:false,
-    once:true //unbind = div.removeEventListener, takes away any future listening on events - AKA only runs once
-  }));
-
-  button.addEventListener('click',()=>{
-    console.log('click!');
-  }, {
-    once:true
-  });
 
 </script>
 </body>
